@@ -22,7 +22,7 @@ function myDB() {
 		const jobposts = db.collection("jobposts");
 		const query = {};
 		console.log(jobposts.find(query).toArray());
-		return jobposts.find(query).toArray();
+		return jobposts.find(query).sort({_id: -1}).toArray();
 	};
 
 	myDB.createAppPost = async (post) => {
