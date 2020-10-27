@@ -14,6 +14,27 @@ function myDB() {
 		console.log(jobcalendar.find(query).toArray());
 		return jobcalendar.find(query).toArray();
 	};
+
+	myDB.getAppDetails = async () => {
+		const client = new MongoClient(uri);
+		await client.connect();
+		const db = client.db("jobapps");
+		const jobposts = db.collection("jobposts");
+		const query = {};
+		console.log(jobposts.find(query).toArray());
+		return jobposts.find(query).sort({_id: -1}).toArray();
+	};
+
+	myDB.createAppPost = async (post) => {
+		const client = new MongoClient(uri);
+		await client.connect();
+		const db = client.db("jobapps");
+		const jobposts = db.collection("jobposts");
+		return await jobposts.insert(post);
+	};
+
+
+	
 	/*return [
 			{
 				Stage: "Online Assesment",
